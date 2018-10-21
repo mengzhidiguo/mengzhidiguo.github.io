@@ -6,7 +6,7 @@
 title: 😀😜😱
 subtitle: 一个还没有写出来博文的博客
 description: 在生活中挣扎的前端马仔🤑
-author: 周建
+author: 小周
 language: zh-CN
 timezone:
 
@@ -82,4 +82,10 @@ deploy:
   branch: master
   email: mengzhidiguo@126.com
   message: now('YYYY-MM-DD HH:mm:ss')
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
 
