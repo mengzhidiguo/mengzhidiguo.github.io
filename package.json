@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "hexo server",
-    "prebuild": "hexo clean",
-    "build": "hexo generate",
+    "start": "hexo server --config source/_data/next.yml",
+    "prebuild": "hexo clean --config source/_data/next.yml",
+    "build": "hexo generate --config source/_data/next.yml",
     "predeploy": "npm run build",
-    "deploy": "hexo deploy"
+    "deploy": "hexo deploy --config source/_data/next.yml"
   },
   "hexo": {
     "version": "3.8.0"
