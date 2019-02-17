@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[缓存]]></title>
+    <url>%2F2018%2F10%2F22%2F%E7%BC%93%E5%AD%98%2F</url>
+    <content type="text"><![CDATA[这东西居然有缓存？？？]]></content>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[个人感悟]]></title>
+    <url>%2F2018%2F10%2F21%2F%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%2F</url>
+    <content type="text"><![CDATA[有时候人活着真是挺孤单的。伴随着年龄的增长，变得不再单纯，心里想的事情越来越多，不能讲只能在心里掖着的事情也越来越多。真扯淡。 额，我的博客之路走起来。希望能够见证我的成长，最后能够见证到我的幸福。]]></content>
+      <categories>
+        <category>心情</category>
+      </categories>
+      <tags>
+        <tag>个人心情</tag>
+        <tag>随便说所</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[service worker 学习]]></title>
+    <url>%2F2018%2F10%2F21%2F%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[学习使用 service worker]]></content>
+      <categories>
+        <category>webapi</category>
+        <category>service worker</category>
+      </categories>
+      <tags>
+        <tag>webapi</tag>
+        <tag>service worker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[学习使用 hexo]]></title>
+    <url>%2F2018%2F10%2F21%2F%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8-hexo%2F</url>
+    <content type="text"><![CDATA[标签引用块测试看一下啊 未知作者 未知来源hexo-theme-next 代码块1important * from 'rxjs'; gist]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+</search>
