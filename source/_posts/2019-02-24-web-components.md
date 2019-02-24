@@ -52,3 +52,10 @@ tags:
 - Shadow tree：Shadow DOM内部的DOM树。
 - Shadow boundary：Shadow DOM结束的地方，也是常规 DOM开始的地方。
 - Shadow root: Shadow tree的根节点。
+
+## 相关框架上的实现
+
+### angular
+
+- angular 普通组件可以使用 shadow dom 的方式组装组件 <https://angular.cn/api/core/Component#encapsulation>
+- angular elements 可以把组件导出为 web components <https://nitayneeman.com/posts/a-practical-guide-to-angular-elements/>
