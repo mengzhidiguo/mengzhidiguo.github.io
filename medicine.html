@@ -261,6 +261,7 @@
         if (this.querys.length <= 0) {
           this.medicines = [];
           this.page.total = 0;
+          this.loadingStatus = 0;
           return;
         }
         const selectKeys = ['four_gas', 'five_flavors', 'return_to_classics', 'efficacy', 'genuine_herbs'];
