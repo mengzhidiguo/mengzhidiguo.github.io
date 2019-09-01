@@ -15,32 +15,6 @@
       margin-top: 10px;
     }
   </style>
-  <script>
-    const keyMap = {
-      province: '省',
-      city: '市',
-      county: '县',
-      soil_type: '土壤类型',
-      organic_matter_mean: '有机质均值',
-      total_nitrogen_mean: '总氮均值',
-      total_phosphorus_mean: '总磷均值',
-      total_potassium_mean: '总钾均值',
-      altitude: '海拔',
-      longitude: '经度',
-      latitude: '纬度',
-      climate_type: '气候类型',
-      average_temperature: '累年月平均气温（0.1℃）',
-      relative_humidity: '累年月相对湿度（1%）',
-      precipitation: '累年月降水量（0.1mm）',
-      sunshine: '累年月日照百分率（1%）',
-      genuine_herbs_id: '道地药材ID',
-      genuine_herbs: '道地药材',
-      four_gas: '四气',
-      five_flavors: '五味',
-      return_to_classics: '归经',
-      efficacy: '功效',
-    };
-  </script>
 </head>
 
 <body>
@@ -69,6 +43,11 @@
               <el-col :sm="24" :md="6" class="margin-top">
                 <el-input v-model="form.county">
                   <template slot="prepend">县</template>
+                </el-input>
+              </el-col>
+              <el-col :sm="24" :md="6" class="margin-top">
+                <el-input v-model="form.month">
+                  <template slot="prepend">月份</template>
                 </el-input>
               </el-col>
               <el-col :sm="24" :md="6" class="margin-top">
@@ -145,78 +124,6 @@
 
             <el-card class="box-card margin-top">
               <el-table :data="medicines" style="width: 100%" v-loading="loadingStatus===1">
-                <el-table-column type="expand">
-                  <template slot-scope="props">
-                    <el-form label-position="left" inline class="demo-table-expand">
-                      <el-form-item label="省">
-                        <span>{{ props.row.attributes.province }}</span>
-                      </el-form-item>
-                      <el-form-item label="市">
-                        <span>{{ props.row.attributes.city }}</span>
-                      </el-form-item>
-                      <el-form-item label="县">
-                        <span>{{ props.row.attributes.county }}</span>
-                      </el-form-item>
-                      <el-form-item label="土壤类型">
-                        <span>{{ props.row.attributes.soil_type }}</span>
-                      </el-form-item>
-                      <el-form-item label="有机质均值">
-                        <span>{{ props.row.attributes.organic_matter_mean }}</span>
-                      </el-form-item>
-                      <el-form-item label="总氮均值">
-                        <span>{{ props.row.attributes.total_nitrogen_mean }}</span>
-                      </el-form-item>
-                      <el-form-item label="总磷均值">
-                        <span>{{ props.row.attributes.total_phosphorus_mean }}</span>
-                      </el-form-item>
-                      <el-form-item label="总钾均值">
-                        <span>{{ props.row.attributes.total_potassium_mean }}</span>
-                      </el-form-item>
-                      <el-form-item label="海拔">
-                        <span>{{ props.row.attributes.altitude }}</span>
-                      </el-form-item>
-                      <el-form-item label="经度">
-                        <span>{{ props.row.attributes.longitude }}</span>
-                      </el-form-item>
-                      <el-form-item label="纬度">
-                        <span>{{ props.row.attributes.latitude }}</span>
-                      </el-form-item>
-                      <el-form-item label="气候类型">
-                        <span>{{ props.row.attributes.climate_type }}</span>
-                      </el-form-item>
-                      <el-form-item label="累年月平均气温（0.1℃）">
-                        <span>{{ props.row.attributes.average_temperature }}</span>
-                      </el-form-item>
-                      <el-form-item label="累年月相对湿度（1%）">
-                        <span>{{ props.row.attributes.relative_humidity }}</span>
-                      </el-form-item>
-                      <el-form-item label="累年月降水量（0.1mm）">
-                        <span>{{ props.row.attributes.precipitation }}</span>
-                      </el-form-item>
-                      <el-form-item label="累年月日照百分率（1%）">
-                        <span>{{ props.row.attributes.sunshine }}</span>
-                      </el-form-item>
-                      <el-form-item label="道地药材ID">
-                        <span>{{ props.row.attributes.genuine_herbs_id }}</span>
-                      </el-form-item>
-                      <el-form-item label="道地药材">
-                        <span>{{ props.row.attributes.genuine_herbs }}</span>
-                      </el-form-item>
-                      <el-form-item label="四气">
-                        <span>{{ props.row.attributes.four_gas }}</span>
-                      </el-form-item>
-                      <el-form-item label="五味">
-                        <span>{{ props.row.attributes.five_flavors }}</span>
-                      </el-form-item>
-                      <el-form-item label="归经">
-                        <span>{{ props.row.attributes.return_to_classics }}</span>
-                      </el-form-item>
-                      <el-form-item label="功效">
-                        <span>{{ props.row.attributes.efficacy }}</span>
-                      </el-form-item>
-                    </el-form>
-                  </template>
-                </el-table-column>
                 <el-table-column label="四气" prop="attributes.four_gas">
                 </el-table-column>
                 <el-table-column label="五味" prop="attributes.five_flavors">
@@ -258,7 +165,8 @@
   .demo-table-expand {
     font-size: 0;
   }
-  el-form-item{
+
+  el-form-item {
     width: 50%;
   }
 
@@ -302,12 +210,14 @@
         relative_humidity: '',
         precipitation: '',
         sunshine: '',
-        genuine_herbs_id: '',
         genuine_herbs: '',
         four_gas: '',
         five_flavors: '',
         return_to_classics: '',
         efficacy: '',
+        month: '',
+        genuine_herbs_source: ''
+
       },
       querys: [],
       page: {
@@ -317,53 +227,64 @@
       },
       loadingStatus: 0,
       medicines: [],
+      _medicines: [],
     },
     methods: {
       onSubmit: async function () {
         try {
           this.loadingStatus = 1;
           const query = new AV.Query('medicine');
-          const keyInt = ['organic_matter_mean', 'total_nitrogen_mean', 'total_phosphorus_mean', 'total_potassium_mean', 'altitude', 'longitude', 'latitude', 'average_temperature', 'relative_humidity', 'precipitation', 'sunshine', 'genuine_herbs_id'];
+          const keyInt = ['month', 'organic_matter_mean', 'total_nitrogen_mean', 'total_phosphorus_mean', 'total_potassium_mean', 'altitude', 'longitude', 'latitude', 'average_temperature', 'relative_humidity', 'precipitation', 'sunshine', 'genuine_herbs_id'];
           this.querys = Object.keys(this.form).reduce((querys, key) => {
             if (this.form[key] === '' || this.form[key] === undefined) {
               return querys;
             }
             const value = keyInt.findIndex(k => k === key) >= 0 ? parseFloat(this.form[key]) : this.form[key];
-            console.log(key, value);
             querys.push(query.equalTo(key, value));
             return querys;
           }, []);
           await this.query();
-          this.loadingStatus = 0;
         } catch (error) {
+          console.log(error);
           this.$message.error('请求出错');
         }
       },
-      changePage: async function (page) {
-        try {
-          if (this.loadingStatus === 1) {
-            return;
-          }
-          this.loadingStatus = 1;
-          await this.query(page);
-          this.page.currentPage = page;
-          this.loadingStatus = 0;
-        } catch (error) {
-          this.$message.error('请求出错');
-        }
+      changePage: function (page) {
+        this.page.total = this._medicines.length;
+        this.page.currentPage = page;
+        const _offset = (this.page.currentPage - 1) * this.page.limit;
+        const offset = _offset < 0 ? 0 : _offset;
+
+        this.medicines = this._medicines.slice(offset, this.page.limit + offset);
       },
-      query: async function (page) {
+      query: async function () {
         if (this.querys.length <= 0) {
           this.medicines = [];
           this.page.total = 0;
           return;
         }
-        const offset = ((page || this.page.currentPage) - 1) * this.page.limit;
-        const query = AV.Query.and(...this.querys)
-          .skip(offset < 0 ? 0 : offset)
-          .limit(this.page.limit);
-        this.page.total = await query.count();
-        this.medicines = await query.find();
+        const selectKeys = ['four_gas', 'five_flavors', 'return_to_classics', 'efficacy', 'genuine_herbs'];
+        const query = AV.Query.and(...this.querys);
+        const total = await query.select(selectKeys).count();
+        let offset = 0;
+        const limit = 1000;
+        const medicineSet = new Set();
+        this._medicines = [];
+        while (offset < total) {
+          const medicines = await query.select(selectKeys).skip(offset).limit(1000).find();
+          offset = offset + medicines.length;
+          medicines.forEach(medicine => {
+            const value = selectKeys.reduce(($value, key) => $value + medicine.attributes[key], '');
+            if (!medicineSet.has(value)) {
+              medicineSet.add(value);
+              this._medicines.push(medicine);
+            }
+          });
+        }
+
+        this.loadingStatus = 0;
+        this.changePage(0);
+
       }
     }
   })
@@ -391,8 +312,10 @@
 累年月日照百分率（1%）    sunshine
 道地药材ID      genuine_herbs_id
 道地药材      genuine_herbs
+道地药材来源  genuine_herbs_source
 四气      four_gas
 五味      five_flavors
 归经      return_to_classics
 功效      efficacy
+月份      month
 -->
